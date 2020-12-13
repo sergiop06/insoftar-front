@@ -1,1 +1,84 @@
-<p>user-details works!</p>
+<div>
+  <div *ngIf="currentUser.id" class="edit-form">
+    <h4>User</h4>
+    <form>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          [(ngModel)]="currentUser.firstName"
+          name="firstName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          [(ngModel)]="currentUser.lastName"
+          name="lastName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="cedula">Cedula</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cedula"
+          [(ngModel)]="currentUser.cedula"
+          name="cedula"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="currentUser.email"
+          name="email"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteUser()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateUser()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentUser.id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+</div>
