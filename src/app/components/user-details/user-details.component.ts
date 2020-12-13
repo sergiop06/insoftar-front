@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
@@ -9,6 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
+
+  form: FormGroup;
 
   currentUser: User = {
     firstName:'',
@@ -22,14 +25,28 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+      this.form = new FormGroup({});
+    }
 
   ngOnInit(): void {
     this.message = '';
     this.getUser(this.route.snapshot.params.id);
+    this.form = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', Validators.required),
+      cedula: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required,Validators.email]),
+      phoneNumber: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get f(){
+    return this.form.controls;
   }
 
   getUser(id: number): void {
+    console.log('received id :'+ id)
     this.userService.get(id)
       .subscribe(
         data => {
@@ -63,6 +80,22 @@ export class UserDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  submit(){
+    console.log(this.form.value);
+    this.userService.update(this.currentUser.id, this.form.value).subscribe(res => {
+         console.log('Post updated successfully!');
+         this.router.navigateByUrl('post/index');
+    })
+  }
+
+  getErrorMessage() {
+    if (this.form.get('email')?.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.form.get('email')?.hasError('email') ? 'Not a valid email' : '';
   }
 
 }

@@ -60,5 +60,18 @@ export class UsersListComponent implements OnInit {
         });
   }
 
+  deleteUser(id: number){
+    this.userService.delete(id).subscribe(res => {
+         this.users = this.users.filter(item => item.id !== id);
+         console.log('Post deleted successfully!');
+    })
+  }
 
+  updateUser(id: number){
+    this.router.navigate(['/users/',id]);
+  }
+
+  goToCreateNewUser(){
+    this.router.navigate(['/add']);
+  }
 }

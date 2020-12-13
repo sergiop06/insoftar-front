@@ -1,4 +1,8 @@
+<div class="container">
+  <h1>Users list </h1>
+  <button type="button" (click)="goToCreateNewUser()" class="btn btn-danger">Create New User</button>
 
+</div>
 <table mat-table [dataSource]="users" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
@@ -35,7 +39,8 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let user">
-      <a class="btn" routerLink="/users/{{user.id}}">update</a>
+      <button type="button" (click)="updateUser(user.id)" class="btn btn-danger">Update</button>
+      <button type="button" (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
     </td>
   </ng-container>
 
