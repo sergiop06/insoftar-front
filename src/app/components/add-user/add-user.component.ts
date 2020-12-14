@@ -62,7 +62,7 @@ export class AddUserComponent implements OnInit {
       this.userService.create(this.form.value)
       .subscribe(
         response => {
-          console.log("user created with id"+ response.text);
+          console.log("user created with id "+ response);
             this.submitted = true;
             this.gotoMain();
         },

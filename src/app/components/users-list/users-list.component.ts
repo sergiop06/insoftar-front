@@ -32,6 +32,7 @@ export class UsersListComponent implements OnInit {
         console.log(data);
       },
       error => {
+        console.log("couldnt rtreive users")
         console.log(error);
       }
     )
@@ -61,16 +62,16 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteUser(id: number){
-    this.userService.delete(id).subscribe(res => {
-         this.refreshList();
+    this.userService.delete(id)
+      .subscribe(
+        response => {
+          console.log("user deleted with id "+ response);
+            this.refreshList();
+        },
+        error => {
+          console.log(error);
+        });
 
-         if (res){
-          console.log('Post deleted successfully!');
-         }else{
-          console.log('couldnt delete user!');
-         }
-
-    })
   }
 
   updateUser(id: number){
