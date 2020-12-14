@@ -26,7 +26,7 @@
          <!-- Cedula -->
          <mat-form-field class="example-full-width" appearance="standard">
           <mat-label>Cedula</mat-label>
-          <input input type="number" matInput placeholder="Ex. 1032467023" [formControl]="cedula" [readonly]="true" [(ngModel)]="currentUser.cedula" formControlName="cedula">
+          <input input type="number" onkeydown="return event.keyCode !== 69" matInput placeholder="Ex. 1032467023" [formControl]="cedula" [readonly]="true" [(ngModel)]="currentUser.cedula" formControlName="cedula">
           <mat-error *ngIf="handleError('cedula', 'required')">
             You must provide a <strong>Cedula </strong>
           </mat-error>
@@ -44,7 +44,7 @@
         <!-- Phone Number -->
         <mat-form-field class="example-full-width" appearance="standard">
           <mat-label>Phone Number</mat-label>
-          <input input type="number" matInput placeholder="Ex. 3043627927" [formControl]="phoneNumber" [(ngModel)]="currentUser.phoneNumber" formControlName="phoneNumber">
+          <input input type="number" onkeydown="return event.keyCode !== 69" matInput placeholder="Ex. 3043627927" [formControl]="phoneNumber" [(ngModel)]="currentUser.phoneNumber" formControlName="phoneNumber">
           <mat-error *ngIf="handleError('phoneNumber','required')">
             You must provide a <strong>Phone number </strong>
           </mat-error>
