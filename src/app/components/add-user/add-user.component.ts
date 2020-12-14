@@ -51,7 +51,8 @@ export class AddUserComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', Validators.required),
       cedula: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required,Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email,Validators.minLength(6),
+        Validators.maxLength(64)]),
       phoneNumber: new FormControl('', [Validators.required]),
     });
   }
@@ -61,14 +62,16 @@ export class AddUserComponent implements OnInit {
       this.userService.create(this.form.value)
       .subscribe(
         response => {
-          console.log(response);
-          this.submitted = true;
-          this.gotoMain();
+          console.log("user created with id"+ response.text);
+            this.submitted = true;
+            this.gotoMain();
         },
         error => {
           console.log(error);
         });
     }
+
+    this.form.controls
 
   }
 

@@ -62,8 +62,14 @@ export class UsersListComponent implements OnInit {
 
   deleteUser(id: number){
     this.userService.delete(id).subscribe(res => {
-         this.users = this.users.filter(item => item.id !== id);
-         console.log('Post deleted successfully!');
+         this.refreshList();
+
+         if (res){
+          console.log('Post deleted successfully!');
+         }else{
+          console.log('couldnt delete user!');
+         }
+
     })
   }
 

@@ -1,72 +1,65 @@
-<div class="container">
-  <h1>Update User</h1>
+<div class="inner-wrapper">
+  <button type="button" (click)="gotoMain()" class="btn btn-danger">Back</button>
+  <h1>Create New User</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()" #resetForm="ngForm" novalidate>
+    <!-- Left block -->
+    <mat-card>
+      <div class="controlers-wrapper">
+        <!-- First Name -->
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="Ex. Sergio" [formControl]="firstName" [(ngModel)]="currentUser.firstName" formControlName="firstName">
+          <mat-error *ngIf="handleError('firstName', 'required')">
+            You must provide a <strong>First name</strong>
+          </mat-error>
+        </mat-form-field>
 
-  <a href="#" routerLink="/users/" class="btn btn-primary">Back</a>
+        <!-- Last Name -->
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Ex. Perez" [formControl]="lastName" [(ngModel)]="currentUser.lastName" formControlName="lastName">
+          <mat-error *ngIf="handleError('lastName', 'required')">
+            You must provide a <strong>Last name</strong>
+          </mat-error>
+        </mat-form-field>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
+         <!-- Cedula -->
+         <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Cedula</mat-label>
+          <input input type="number" matInput placeholder="Ex. 1032467023" [formControl]="cedula" [readonly]="true" [(ngModel)]="currentUser.cedula" formControlName="cedula">
+          <mat-error *ngIf="handleError('cedula', 'required')">
+            You must provide a <strong>Cedula </strong>
+          </mat-error>
+        </mat-form-field>
 
-      <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input
-              formControlName="firstName"
-              id="firstName"
-              type="text"
-              [(ngModel)]="currentUser.firstName"
-              class="form-control">
-          <div *ngIf="f.firstName.touched && f.firstName.invalid" class="alert alert-danger">
-          </div>
+        <!-- Email -->
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. user@example.com" [formControl]="email" [(ngModel)]="currentUser.email" formControlName="email">
+          <mat-error *ngIf="handleError('email', 'required')">
+            You must provide a <strong>Email </strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Phone Number -->
+        <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label>Phone Number</mat-label>
+          <input input type="number" matInput placeholder="Ex. 3043627927" [formControl]="phoneNumber" [(ngModel)]="currentUser.phoneNumber" formControlName="phoneNumber">
+          <mat-error *ngIf="handleError('phoneNumber','required')">
+            You must provide a <strong>Phone number </strong>
+          </mat-error>
+        </mat-form-field>
       </div>
+    </mat-card>
 
-      <div class="form-group">
-        <label for="lastName">Last Name:</label>
-        <input
-            formControlName="lastName"
-            id="lastName"
-            type="text"
-            [(ngModel)]="currentUser.lastName"
-            class="form-control">
-        <div *ngIf="f.lastName.touched && f.lastName.invalid" class="alert alert-danger">
-
+    <!-- Submit & Reset -->
+    <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn">Update</button>
         </div>
       </div>
-
-      <div class="form-group">
-        <label for="cedula">cedula:</label>
-        <input
-            formControlName="cedula"
-            id="cedula"
-            type="text"
-            [(ngModel)]="currentUser.cedula"
-            class="form-control">
-        <div *ngIf="f.cedula.touched && f.cedula.invalid" class="alert alert-danger">
-
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="email">email:</label>
-        <input
-            formControlName="email"
-            id="email"
-            type="text"
-            [(ngModel)]="currentUser.email"
-            class="form-control">
-        <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="phoneNumber">phoneNumber:</label>
-        <input
-            formControlName="phoneNumber"
-            id="phoneNumber"
-            type="text"
-            [(ngModel)]="currentUser.phoneNumber"
-            class="form-control">
-        <div *ngIf="f.phoneNumber.touched && f.phoneNumber.invalid" class="alert alert-danger">
-        </div>
-      </div>
-
-      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+    </mat-card>
   </form>
 </div>
+

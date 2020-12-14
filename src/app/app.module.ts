@@ -14,6 +14,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatDividerModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

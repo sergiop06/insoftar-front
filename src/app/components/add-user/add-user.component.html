@@ -1,8 +1,6 @@
 <div class="inner-wrapper">
-  <h1>Create New User</h1>
-
   <button type="button" (click)="gotoMain()" class="btn btn-danger">Back</button>
-
+  <h1>Create New User</h1>
   <form [formGroup]="form" (ngSubmit)="saveUser()" #resetForm="ngForm" novalidate>
     <!-- Left block -->
     <mat-card>
@@ -12,7 +10,7 @@
           <mat-label>First Name</mat-label>
           <input matInput placeholder="Ex. Sergio" [formControl]="firstName" formControlName="firstName">
           <mat-error *ngIf="handleError('firstName', 'required')">
-            You must provide a<strong>student name</strong>
+            You must provide a <strong>First name</strong>
           </mat-error>
         </mat-form-field>
 
@@ -21,7 +19,7 @@
           <mat-label>Last Name</mat-label>
           <input matInput placeholder="Ex. Perez" [formControl]="lastName" formControlName="lastName">
           <mat-error *ngIf="handleError('lastName', 'required')">
-            You must provide a<strong>last name</strong>
+            You must provide a <strong>Last name</strong>
           </mat-error>
         </mat-form-field>
 
@@ -30,25 +28,25 @@
           <mat-label>Cedula</mat-label>
           <input input type="number" matInput placeholder="Ex. 1032467023" [formControl]="cedula" formControlName="cedula">
           <mat-error *ngIf="handleError('cedula', 'required')">
-            You must provide a<strong>cedula </strong>
+            You must provide a <strong>Cedula </strong>
           </mat-error>
         </mat-form-field>
 
         <!-- Email -->
         <mat-form-field class="example-full-width" appearance="standard">
-          <mat-label>Enter your email</mat-label>
+          <mat-label>Email</mat-label>
           <input matInput placeholder="Ex. user@example.com" [formControl]="email" formControlName="email">
           <mat-error *ngIf="handleError('email', 'required')">
-            You must provide a<strong>cedula </strong>
+            You must provide a <strong>Email </strong>
           </mat-error>
         </mat-form-field>
 
         <!-- Phone Number -->
         <mat-form-field class="example-full-width" appearance="standard">
-          <mat-label>Cedula</mat-label>
+          <mat-label>Phone Number</mat-label>
           <input input type="number" matInput placeholder="Ex. 3043627927" [formControl]="phoneNumber" formControlName="phoneNumber">
           <mat-error *ngIf="handleError('phoneNumber','required')">
-            You must provide a<strong>cedula </strong>
+            You must provide a <strong>Phone number </strong>
           </mat-error>
         </mat-form-field>
       </div>
@@ -63,6 +61,5 @@
       </div>
     </mat-card>
   </form>
-
 </div>
 

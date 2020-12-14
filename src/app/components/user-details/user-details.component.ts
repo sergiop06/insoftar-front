@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
@@ -12,8 +12,19 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserDetailsComponent implements OnInit {
 
   form: FormGroup;
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  @ViewChild('resetUserForm') myNgForm: any;
+  firstName = new FormControl('', [Validators.required]);
+  lastName= new FormControl('', Validators.required);
+  cedula= new FormControl('', [Validators.required]);
+  email= new FormControl('', [Validators.required,Validators.email]);
+  phoneNumber= new FormControl('', [Validators.required]);
 
   currentUser: User = {
+    id: undefined,
     firstName:'',
     lastName: '',
     cedula: undefined,
@@ -21,11 +32,13 @@ export class UserDetailsComponent implements OnInit {
     phoneNumber: undefined
   };
   message = '';
+  submitted = false;
 
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    public fb: FormBuilder) {
       this.form = new FormGroup({});
     }
 
@@ -46,7 +59,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getUser(id: number): void {
-    console.log('received id :'+ id)
     this.userService.get(id)
       .subscribe(
         data => {
@@ -83,10 +95,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.form.value);
+    console.log("submit"+this.form.value);
     this.userService.update(this.currentUser.id, this.form.value).subscribe(res => {
          console.log('Post updated successfully!');
-         this.router.navigateByUrl('post/index');
+         this.gotoMain();
     })
   }
 
@@ -94,8 +106,15 @@ export class UserDetailsComponent implements OnInit {
     if (this.form.get('email')?.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.form.get('email')?.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  public handleError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
+  }
+
+  gotoMain(){
+    this.router.navigate(['/']);
   }
 
 }
